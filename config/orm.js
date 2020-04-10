@@ -24,9 +24,18 @@ class ORM  {
     const queryString = `SELECT ${this.printQuestionMarks(colsToSelect.length, 'cols')} FROM ?? INNER JOIN ?? ON ??.?? = ??.??`;
     return this.connection.query(queryString, [...colsToSelect, tableOne, tableTwo, tableOne, tableOneCol, tableTwo, tableTwoCol])
   }
+  innerJoinWhere(colsToSelect, tableOne, tableTwo, tableOneCol, tableTwoCol,keyTable, keyCol, keyValue) {
+    // 'SELECT firstName, lastName, title, coverPhoto FROM authors INNER JOIN books ON authors.id = books.authorsId'
+    const queryString = `SELECT ${this.printQuestionMarks(colsToSelect.length, 'cols')} FROM ?? WHERE ??.?? = ? INNER JOIN ?? ON ??.?? = ??.??`;
+    return this.connection.query(queryString, [...colsToSelect, tableOne, keyTable, keyCol, keyValue, tableTwo, tableOne, tableOneCol, tableTwo, tableTwoCol])
+  }
+  insertData(table, columnsArray, valuesArray){
+    const queryString = `INSERT INTO ?? (${columnsArray.join(",")}) VALUES (${this.printQuestionMarks(valuesArray.length, "vals")})`;
+    return this.connection.query(queryString, [table, ...valuesArray]);
+  }
 };
 module.exports = new ORM(connection);
-const test = new ORM(connection);
-test.innerJoin(['firstName', 'lastName', 'title', 'coverPhoto'], 'authors', 'books', 'id', 'authorId')
-.then(results => console.log(results))
-.catch(err => console.log(err))
+// const test = new ORM(connection);
+// test.innerJoin(['firstName', 'lastName', 'title', 'coverPhoto'], 'authors', 'books', 'id', 'authorId')
+// .then(results => console.log(results))
+// .catch(err => console.log(err))
