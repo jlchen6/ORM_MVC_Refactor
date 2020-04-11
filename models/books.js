@@ -12,8 +12,8 @@ class Book {
 
     getOneBook(bookTitle) {
         // return this.connection.query('SELECT books.id, firstName, lastName, title, coverPhoto FROM authors INNER JOIN books ON authors.id = books.authorId WHERE books.title=?', [bookTitle])
-        var colsToSelect = ["books.id", "firstName", "lastName", "title", "coverPhoto"];
-        return orm.innerJoinWhere(colsToSelect,"authors", "books", "id", "authorId", "books","title", bookTitle);
+        var colsToSelect = ["firstName", "lastName", "title", "coverPhoto"];
+        return orm.innerJoinWhere("books", colsToSelect,"authors", "books", "id", "authorId", "books","title", bookTitle);
     }
 
     addBook(title, coverPhoto, authorId) {
