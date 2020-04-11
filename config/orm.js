@@ -25,7 +25,7 @@ class ORM  {
     return this.connection.query(queryString, [...colsToSelect, tableOne, tableTwo, tableOne, tableOneCol, tableTwo, tableTwoCol]);
   }
   innerJoinWhere(colsToSelect, tableOne, tableTwo, tableOneCol, tableTwoCol,keyTable, keyCol, keyValue) {
-    // 'SELECT firstName, lastName, title, coverPhoto FROM authors INNER JOIN books ON authors.id = books.authorsId'
+    // 'SELECT firstName, lastName, title, coverPhoto FROM authors WHERE books.id = bookId INNER JOIN books ON authors.id = books.authorsId'
     const queryString = `SELECT ${this.printQuestionMarks(colsToSelect.length, 'cols')} FROM ?? WHERE ??.?? = ? INNER JOIN ?? ON ??.?? = ??.??`;
     return this.connection.query(queryString, [...colsToSelect, tableOne, keyTable, keyCol, keyValue, tableTwo, tableOne, tableOneCol, tableTwo, tableTwoCol]);
   }
