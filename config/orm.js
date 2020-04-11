@@ -33,6 +33,11 @@ class ORM  {
     const queryString = `INSERT INTO ?? (${columnsArray.join(",")}) VALUES (${this.printQuestionMarks(valuesArray.length, "vals")})`;
     return this.connection.query(queryString, [table, ...valuesArray]);
   }
+  deleteData(table, keyCol, keyVal){
+    const queryString = "DELETE FROM ?? WHERE ?? = ?";
+
+    return this.connection.query(queryString, [table, keyCol, keyVal]);
+  }
 };
 module.exports = new ORM(connection);
 // const test = new ORM(connection);
