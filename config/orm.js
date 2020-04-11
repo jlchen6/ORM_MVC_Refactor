@@ -30,10 +30,12 @@ class ORM  {
     return this.connection.query(queryString, [idTable, "id", ...colsToSelect, tableOne, tableTwo, tableOne, tableOneCol, tableTwo, tableTwoCol, keyTable, keyCol, keyValue]);
   }
   insertData(table, columnsArray, valuesArray){
+    // 'INSERT INTO books (title, authorId, coverPhoto) VALUES (bookTitle, bookAuthorId, coverUrl)'
     const queryString = `INSERT INTO ?? (${columnsArray.join(",")}) VALUES (${this.printQuestionMarks(valuesArray.length, "vals")})`;
     return this.connection.query(queryString, [table, ...valuesArray]);
   }
   deleteData(table, keyCol, keyVal){
+    // 'DELETE FROM notes WHERE id = noteId'
     const queryString = "DELETE FROM ?? WHERE ?? = ?";
 
     return this.connection.query(queryString, [table, keyCol, keyVal]);
