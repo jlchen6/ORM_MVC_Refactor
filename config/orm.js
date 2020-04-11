@@ -22,12 +22,12 @@ class ORM  {
   innerJoin(colsToSelect, tableOne, tableTwo, tableOneCol, tableTwoCol) {
     // 'SELECT firstName, lastName, title, coverPhoto FROM authors INNER JOIN books ON authors.id = books.authorsId'
     const queryString = `SELECT ${this.printQuestionMarks(colsToSelect.length, 'cols')} FROM ?? INNER JOIN ?? ON ??.?? = ??.??`;
-    return this.connection.query(queryString, [...colsToSelect, tableOne, tableTwo, tableOne, tableOneCol, tableTwo, tableTwoCol])
+    return this.connection.query(queryString, [...colsToSelect, tableOne, tableTwo, tableOne, tableOneCol, tableTwo, tableTwoCol]);
   }
   innerJoinWhere(colsToSelect, tableOne, tableTwo, tableOneCol, tableTwoCol,keyTable, keyCol, keyValue) {
     // 'SELECT firstName, lastName, title, coverPhoto FROM authors INNER JOIN books ON authors.id = books.authorsId'
     const queryString = `SELECT ${this.printQuestionMarks(colsToSelect.length, 'cols')} FROM ?? WHERE ??.?? = ? INNER JOIN ?? ON ??.?? = ??.??`;
-    return this.connection.query(queryString, [...colsToSelect, tableOne, keyTable, keyCol, keyValue, tableTwo, tableOne, tableOneCol, tableTwo, tableTwoCol])
+    return this.connection.query(queryString, [...colsToSelect, tableOne, keyTable, keyCol, keyValue, tableTwo, tableOne, tableOneCol, tableTwo, tableTwoCol]);
   }
   insertData(table, columnsArray, valuesArray){
     const queryString = `INSERT INTO ?? (${columnsArray.join(",")}) VALUES (${this.printQuestionMarks(valuesArray.length, "vals")})`;
