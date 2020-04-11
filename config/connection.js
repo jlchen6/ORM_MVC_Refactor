@@ -1,21 +1,25 @@
 const mysql = require('mysql');
 const util = require('util');
 
-const connection = mysql.createConnection({
-    host: 'localhost',
-    port: process.env.PORT || 3306,
-    user: 'root',
-    password: 'sql555',
-    database: 'library_db'
-  });
+var jawsConnection = mysql.createConnection(process.env.JAWSDB_URL);
 
-connection.connect();
+jawsConnection.connect();
+
+// const connection = mysql.createConnection({
+//     host: 'localhost',
+//     port: process.env.PORT || 3306,
+//     user: 'root',
+//     password: 'sql555',
+//     database: 'library_db'
+//   });
+
+// connection.connect();
 
 // we give connection.query access to promises
 // i.e. .then() and .catch()
-connection.query = util.promisify(connection.query);
+jawsConnection.query = util.promisify(jawsConnection.query);
 
-module.exports = connection;
+module.exports = jawsConnection;
 
 // WITHOUT PROMISIFY
 // connection.query('SELECT * FROM books', function(err, results){
