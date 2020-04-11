@@ -42,5 +42,8 @@ class ORM  {
 module.exports = new ORM(connection);
 // const test = new ORM(connection);
 // test.innerJoin(['firstName', 'lastName', 'title', 'coverPhoto'], 'authors', 'books', 'id', 'authorId')
-// .then(results => console.log(results))
+// .then(results => {
+//   console.log(results)
+//   return 
+// })
 // .catch(err => console.log(err))
